@@ -1,5 +1,6 @@
 $(function(){
     $(".helptext").css('display', 'none');
+    $("#myText").css('display', 'none');
 });
 
 function toggle(cpid)
@@ -31,7 +32,7 @@ function comment(taid, cmtid)
 		success:function(orders)
         {
             $("#ajaxcmnt").html(orders);
-           
+
         },
 	});
 }
