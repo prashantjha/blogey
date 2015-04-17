@@ -92,9 +92,11 @@ def viewPost(request,post_id):
     args['comments'] = comments
     args['cmnt_cmnt'] = Comments.objects.all()
 
-    data = serializers.serialize("json", Comments.objects.all())
+    """data = serializers.serialize("json", Comments.objects.all())
     allField = json.loads(data)
-    args['data'] = allField
+    args['data'] = allField"""
+    args['result'] = postCmnt(post_id)
+    #print postCmnt(post_id)
     return render_to_response('viewPost.html', args,context_instance=RequestContext(request))
     
 
@@ -142,46 +144,54 @@ def comment(request,post_id):
         args['post'] = post
         post_type = ContentType.objects.get_for_model(post.__class__)
         args['comments'] = Comments.objects.filter(content_type = post_type, object_id = post_id)
+        args['cmnt_cmnt'] = Comments.objects.all()
         return render_to_response('viewPost.html', args,context_instance=RequestContext(request))
 
 @login_required(login_url='/login/')
 def comment_cmnt(request,cmnt_id):
+    #pdb.set_trace()
     cmnt = Comments.objects.get(id=cmnt_id)
     if request.method == 'POST':
-        cmnt = Comments(content_object = cmnt, user = request.user, comment = request.POST['comment'])
+        cmnt = Comments(content_object = cmnt, user = request.user, comment = request.POST['comment_text'])
         cmnt.save()
+        post = Post.objects.get(id=request.POST['post_id'])
         args = {}
         args.update(csrf(request))
-        args['request'] = request
-        args['cmnt'] = cmnt
-        cmnt_type = ContentType.objects.get_for_model(cmnt.__class__)
-        args['comments'] = Comments.objects.filter(content_type = cmnt_type, object_id = cnmt_id)
-        return render_to_response('viewPost.html', args,context_instance=RequestContext(request))
 
-def postCmnt():
-    post_id =1
+        args['request'] = request
+        args['post'] = post
+        post_type = ContentType.objects.get_for_model(post.__class__)
+        args['comments'] = Comments.objects.filter(content_type = post_type, object_id = request.POST['post_id'])
+        args['cmnt_cmnt'] = Comments.objects.all()
+        return render_to_response('ajaxviewPost.html', args,context_instance=RequestContext(request))
+
+    return HttpResponse("hello")
+
+def postCmnt(post_id):
+    r = {}
     post = Post.objects.get(id=post_id)
     post_type = ContentType.objects.get_for_model(post.__class__)
     q = Comments.objects.filter(content_type = post_type, object_id = post_id)
 
-    for i in q:
-        print i.id,
-        print i.comment
-        cmntCmnt(i.id)
+
+    for c in q:
+        r[c] = cmntCmnt(c)
+
+    return r
 
 
 
-def cmntCmnt(request,cmnt_id):
+def cmntCmnt(c):
     #pdb.set_trace()
-    cmnt = Comments.objects.get(id=cmnt_id)
-    cmnt_type = ContentType.objects.get_for_model(cmnt.__class__)
-    q = Comments.objects.filter(content_type = cmnt_type, object_id = cmnt_id)
+    
+    cmnt_type = ContentType.objects.get_for_model(c.__class__)
+    z = Comments.objects.filter(content_type = cmnt_type, object_id = c.id)
 
-    for i in q:
-        print i.id,
-        print i.comment
-        cmntCmnt(i.id)
-    return HttpResponse("hello")
-
+    p ={}
+    q =[]
+    for l in  z:
+        p[l] = cmntCmnt(l)
+    q.append(p)
+    return q
 
 

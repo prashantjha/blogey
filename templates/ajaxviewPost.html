@@ -1,0 +1,22 @@
+<div class="col-md-8 " style=" height:200px; overflow-y:auto;">
+	{% for cmnt in comments %}
+		<div class="comment" align="left" > <span class="author2" >  <strong>{{cmnt.user.username}}:</strong> </span>{{ cmnt.comment }}<button onclick="toggle('cpbox{{cmnt.id}}')">comment</button>
+
+		<div id="cpbox{{cmnt.id}}" class="" style="display:none">
+			<textarea id="ta{{cmnt.id}}"></textarea>
+			<button class="btn btn-primary" onclick="comment('ta{{cmnt.id}}', {{cmnt.id}}), toggle('cpbox{{cmnt.id}}')">Comment</button>
+		</div>
+
+		
+		{% for data in cmnt_cmnt %}
+
+			{% if data.content_type.id  != cmnt.content_type.id  and data.object_id == cmnt.id %}	
+				<div class="comment" align="left" > <span class="author2" >  <strong>{{data.user.username}}:</strong> </span>{{ data.comment }}</div>
+			{% endif %}
+
+		{% endfor %}
+
+		</div>
+	{% endfor %}
+	   
+</div>

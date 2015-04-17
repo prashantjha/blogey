@@ -16,6 +16,6 @@ urlpatterns = patterns('',
     url(r'^delete/(?P<post_id>\d+)',views.delete,name='deletePost'),
     url(r'^edit/(?P<post_id>\d+)',views.edit,name='EditPost'),
     url(r'^update_post/$', views.update_post, name='updatePost'),
-    url(r'^comment_cmnt/(?P<cmnt_id>\d+)',views.cmntCmnt,name = "CommentComment"),
+    url(r'^comment_cmnt/(?P<cmnt_id>\d+)',views.comment_cmnt,name = "CommentComment"),
 
 )
