@@ -28,12 +28,36 @@
 		</div>
 
 		<div class="col-md-8" style=" height:200px; overflow-y:auto;">
-		{% for cmnt in comments %}
-			<div class="comment" align="left" > <span class="author2" >  <strong>{{cmnt.user.username}}:</strong> </span>{{ cmnt.comment }}</div>
-		{% endfor %}
+			{% for cmnt in comments %}
+				<div class="comment" align="left" > <span class="author2" >  <strong>{{cmnt.user.username}}:</strong> </span>{{ cmnt.comment }}
+
+				<a href="/comment_cmnt/{{cmnt.id}}">comment</a>
+				</div>
+				
+				{% for d in data %}
+					{% if d.fields.content_type  != cmnt.content_type.id  and d.fields.object_id == cmnt.id %}
+						<div class="comment" align="left" > <span class="author2" > </span>{{  d.fields.comment }}<a href="/comment_cmnt/{{d.pk}}" align="right">comment</a></div>
+						
+					{% endif %}
+
+				{% endfor %}
+			{% endfor %}
 		</div>
+
+
+		<div class="col-md-8" style=" height:200px; overflow-y:auto;">
+			{% for cmnt in data %}
+			   
+				
+			{% endfor %}
+			   
+		</div>
+
+
+
+
 	</div>
-	{{comments.}}
+
 
 
   	

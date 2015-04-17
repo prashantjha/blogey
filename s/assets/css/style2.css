@@ -1,0 +1,151 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+@import url(http://fonts.googleapis.com/css?family=Bitter:700);
+
+
+::selection {
+	background-color: #E74C3C;
+	color: #fff;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	color: #2C3E50;
+	font-weight: 400;
+	background-color: #ECF0F1;
+}
+
+a {
+	text-decoration: none;
+	text-transform: lowercase;
+	font-size: 20px;
+	color: #E67E22;
+}
+
+header {
+	height: 150px;
+	background: url('/static/img/blogey_logo.png') no-repeat center center;
+/*	border-bottom: solid #34495E 2px;*/
+	margin-bottom: 25px;
+}
+
+.greeting {
+	color: #D35400;
+	text-transform: lowercase;
+	font-size: 18px;
+}
+
+nav {
+	float: right;
+	margin-top: 100px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul li{
+	float: left;
+	padding: 5px;
+}
+
+.container {
+	max-width: 850px;
+	margin: 40px auto;
+}
+
+.no-post {
+	text-align: center;
+	font-weight: 700;
+	color: #BDC3C7;
+	text-transform: uppercase;
+	font-size: 36px;
+}
+
+form label{
+	display: block;
+	margin: 30px 0 30px 0;
+	text-transform: lowercase;
+	color: #16A085;
+	width: 280px;
+	font-size: 20px;
+}
+
+form input {
+	display: block;
+	margin-top: 10px;
+	font-size: 24px;
+	color: #2C3E50;
+	border-radius: 5px;
+	/*float: right;*/
+}
+
+textarea {
+	font-size: 24px;
+	color: #2C3E50;
+	border-radius: 5px;
+	line-height: 1.2;
+}
+input[type='submit'] {
+	padding: 5px;
+	text-transform: lowercase;
+	background-color: #1ABC9C;
+	color: #fff;
+	border-color: transparent;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.error {
+	color: #fff;
+	padding: 10px;
+	background-color: #E74C3C;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	font-size: 18px;
+	text-align: center;
+}
+
+.success {
+	color: #fff;
+	padding: 10px;
+	background-color: #27AE60;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	font-size: 18px;
+	text-align: center;
+}
+
+article {
+	background: #fff;
+	padding: 25px;
+	border: #BDC3C7 solid 2px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+.title {
+	font-family: 'Bitter', serif;
+	font-weight: 700;
+	color: #E67E22;
+	font-size: 30px;
+	text-transform: uppercase;
+}
+
+.post-content {
+	font-size: 20px;
+	line-height: 1.2;
+}
+
+form {
+	background: #fff;
+	padding: 25px 25px;
+	border: #BDC3C7 solid 2px;
+	border-radius: 10px;
+}
+
+.author {
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 18px;
+	color: #BDC3C7;
+}

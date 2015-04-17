@@ -21,11 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'ysm=0(r8d!g^cb+d*1%sru-#oxjiaetcyj53k3oohly8bo&bqr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,6 +47,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
 )
 
 ROOT_URLCONF = 'blogey.urls'
@@ -80,8 +91,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-MEDIA_ROOT = '/assets/'
-MEDIA_URL = ''
 
 
 # Static files (CSS, JavaScript, Images)
@@ -90,7 +99,7 @@ MEDIA_URL = ''
 STATIC_ROOT = os.path.join(BASE_DIR, 's/')
 
 STATIC_URL = '/static/'
-
+ADMIN_MEDIA_PREFIX='/static/admin/'
 STATICFILES_DIRS = (
 
     ('assets', os.path.join(BASE_DIR, 'static/')),

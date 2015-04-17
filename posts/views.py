@@ -9,6 +9,7 @@ from django.http import Http404
 from forms import *
 from models import *
 from django.core import serializers
+import json
 
 import pdb
 
@@ -90,8 +91,10 @@ def viewPost(request,post_id):
     comments = Comments.objects.filter(content_type = post_type, object_id = post_id).order_by('-conmmentTime')
     args['comments'] = comments
     args['cmnt_cmnt'] = Comments.objects.all()
-    data = serializers.serialize("xml", Comments.objects.all())
-    args['data'] = data
+
+    data = serializers.serialize("json", Comments.objects.all())
+    allField = json.loads(data)
+    args['data'] = allField
     return render_to_response('viewPost.html', args,context_instance=RequestContext(request))
     
 
@@ -166,10 +169,10 @@ def postCmnt():
         print i.comment
         cmntCmnt(i.id)
 
-        
 
-def cmntCmnt(cmnt_id):
 
+def cmntCmnt(request,cmnt_id):
+    #pdb.set_trace()
     cmnt = Comments.objects.get(id=cmnt_id)
     cmnt_type = ContentType.objects.get_for_model(cmnt.__class__)
     q = Comments.objects.filter(content_type = cmnt_type, object_id = cmnt_id)
@@ -178,6 +181,7 @@ def cmntCmnt(cmnt_id):
         print i.id,
         print i.comment
         cmntCmnt(i.id)
+    return HttpResponse("hello")
 
 
 
