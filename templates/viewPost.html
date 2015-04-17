@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+
+	<article>
+		<section>
+			<a href="/post/{{post.id}}/" class="title">{{post.title | safe}}</a>
+			<h2 class="author">by <strong>{{post.author.username}}</strong> on {{post.createdDate |date:"M d, Y" }}</h2>
+		</section>
+		<p class="post-content">
+				{{post.content  |safe}}		
+		</p>
+		{%if post.author == request.user %}
+			<a href="/edit/{{post.id}}"><button type="button" class="btn btn-default">Edit Post</button></a>
+			<a href="/delete/{{post.id}}"><button type="button" class="btn btn-default">Delete Post</button></a>
+		{% endif %}
+	</article>
+	<div class="row" >
+		<div style="display: block" class="col-md-4">
+		<form method="POST" action="/comment/{{post.id}}/">{% csrf_token %}
+			<label for="comment">
+				<textarea name="comment"  placeholder="comment.." required style="height:80px; width: 100%; border-radius: 5px"></textarea>
+				<input type="submit" value="Post" class="btn btn-primary" style="float:right; width:100px;">
+			</label>
+			
+		</form>
+		</div>
+
+		<div class="col-md-8" style=" height:200px; overflow-y:auto;">
+		{% for cmnt in comments %}
+			<div class="comment" align="left" > <span class="author2" >  <strong>{{cmnt.user.username}}:</strong> </span>{{ cmnt.comment }}</div>
+		{% endfor %}
+		</div>
+	</div>
+	{{comments.}}
+
+
+  	
+
+</div>
+{% endblock %}

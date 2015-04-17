@@ -1,0 +1,84 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.signup-form {
+	margin: 0 auto;
+}
+
+.author {
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 18px;
+	color: #BDC3C7;
+}
+.author2 {
+	font-weight: 400;
+	text-transform: uppercase;
+	color: #BDC3C7;
+}
+.title {
+	font-family: 'Bitter', serif;
+	font-weight: 700;
+	color: #E67E22;
+	font-size: 30px;
+	text-transform: uppercase;
+}
+.post-content {
+	font-size: 20px;
+	line-height: 1.2;
+}
+.errorlist{
+	color :red;
+}
+.comment{
+	border: 2px solid #a1a1a1;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+article {
+	background: #fff;
+	padding: 25px;
+	border: #BDC3C7 solid 2px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+::selection {
+	background-color: #E74C3C;
+	color: #fff;
+}
+
+form label{
+	display: block;
+	margin: 10px 0 10px 0;
+	text-transform: lowercase;
+	font-size: 20px;
+}
+
+form input {
+	display: block;
+	margin-top: 10px;
+	font-size: 24px;
+	color: #2C3E50;
+	border-radius: 5px;
+
+}
+form textarea{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	display: block;
+	margin-top: 5px;
+	font-size: 24px;
+	color: #2C3E50;
+	border-radius: 5px;
+	width: 300px;
+}
+
+
+

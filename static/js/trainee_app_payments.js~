@@ -1,0 +1,118 @@
+/**
+ * Created by KrishnaTeja on 2/15/15.
+ */
+
+$(function () {
+
+
+    $('#payment_submit').click(function () {
+//      function(event){event.preventDefault(); }
+        var form = this;
+        Stripe.setPublishableKey('pk_test_xXWyn9pyORz1e8bCSpQiIswN');
+        var card = {
+            number: $("#credit_card_number").val(),
+            expMonth: $("#expiry_month").val(),
+            expYear: $("#expiry_year").val(),
+            cvc: $("#cvv").val(),
+        };
+
+        Stripe.createToken(card, function (status, response) {
+
+            if (status === 200) {
+//             console.log(status, response);
+                $("#id_stripe_id").val(response.id);
+
+                $("#id_course").val($("#course_id").val());
+
+                var email = $('#emailid').val();
+                var stripe_id = $("#id_stripe_id").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/trainee/payment/",
+                    beforeSend: function () {
+                        $('#processing_payment').html('Making Payment...');
+                    },
+                    data: {
+                        'emailid': email,
+                        'stripe_id': stripe_id,
+                        'course_id': $("#course_id").val(),
+                        'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val()
+                    },
+                    success: searchSuccess,
+                    dataType: 'html'
+                });
+
+
+            } else {
+                $("#payment_submit").attr("disabled", false);
+            }
+
+        });
+
+        return false;
+
+    });
+
+
+});
+
+
+function searchSuccess(data, textStatus, jqXHR) {
+    console.log(data)
+    window.location.href = '/trainee/payment_success/';
+
+}
+
+function launchCourse(id) {
+
+    $.ajax({
+        type: "POST",
+        url: "/trainee/launch_course/",
+        data: {
+            'id': id,
+            'csrfmiddlewaretoken': $("input[name=csrfmiddlewaretoken]").val()
+        },
+        success: searchSuccess1,
+        dataType: 'html'
+    });
+
+
+}
+
+
+function viewCourse(slug) {
+    window.location.href = "/trainee/fetch/" + slug;
+
+}
+
+function searchSuccess1(data, textStatus, jqXHR) {
+
+    $("#pre_launch_course").hide();
+    $("#launched_course").html(data);
+
+}
+
+function play_video(video_url){
+     data = '<video src=\'"+video+"\' />';
+
+    data = '<video width="500" controls>'
+    data += '<source src="'+video_url+'" type="video/mp4">'
+
+    data += 'Your browser does not support HTML5 video.'
+    data += '</video>'
+   data += '<p id="dyna_desc"><b>Description:</b><p>'+$("#video_desc").val()+'</p></p>'
+    console.log(data)
+//    data =  '<video id="example_video_1" class="video-js vjs-default-skin" controls preload="auto" width="550" height="250"'
+////    data += 'poster="{{ course.COURSE_IMAGE_URL }}"'
+//    data += 'data-setup=\'{"example_option":true}\'>'
+//
+//    data += '<source src="'+video_url+'" type= "video/mp4" />'
+//
+//    data += '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>'
+//    data += '</video>'
+//
+
+    $("#video_player").html(data)
+
+}
