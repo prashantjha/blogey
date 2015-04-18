@@ -10,7 +10,8 @@ from forms import *
 from models import *
 from django.core import serializers
 import json
-
+from datetime import datetime
+from django.utils import timezone
 import pdb
 
 def login(request):
@@ -120,7 +121,9 @@ def update_post(request):
 
         form = NewPostForm(request.POST, instance = post)
 
+        pdb.set_trace()
         if form.is_valid():
+            form.instance.modifiedDate = datetime.now()
             form.save()
 
         return HttpResponseRedirect('/')
