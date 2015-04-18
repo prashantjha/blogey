@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^edit/(?P<post_id>\d+)',views.edit,name='EditPost'),
     url(r'^update_post/$', views.update_post, name='updatePost'),
     url(r'^comment_cmnt/(?P<cmnt_id>\d+)',views.comment_cmnt,name = "CommentComment"),
+    url(r'^more_cmnt/(?P<cmnt_id>\d+)',views.more_cmnt,name = "More Comment"),
 
 )

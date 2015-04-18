@@ -1,0 +1,14 @@
+{% for cmcm in more_cmnt %}
+	<div class="comment" align="left" > <span class="author2" >  <strong>{{cmcm.user.username}}:</strong> </span>{{ cmcm.comment }}<button onclick="toggle('cpbox{{cmcm.id}}')">comment</button>
+		<div id="cpbox{{cmcm.id}}" class="" style="display:none">
+			<textarea id="ta{{cmcm.id}}" required></textarea>
+			<button class="btn btn-primary" onclick="comment('ta{{cmcm.id}}', {{cmcm.id}}), toggle('cpbox{{cmcm.id}}')">Comment</button> 
+
+		</div>
+		<span id="more_cmnt">
+			<a  onclick="more_comment('p{{cmcm.id}}', {{cmcm.id}} )" >view more</a>
+			<p  id ="p{{cmcm.id}}"></p>
+		</span>
+
+	</div>
+{% endfor %}

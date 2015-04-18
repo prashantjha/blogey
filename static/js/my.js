@@ -40,3 +40,26 @@ function comment(taid, cmtid)
              }
 	});
 }
+
+function more_comment(pid,cmtid)
+{
+	
+	$.ajax({
+		type:"POST",
+		url:"/more_cmnt/"+cmtid,
+		data: {
+			csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+			
+		},
+		success:function(orders)
+        {
+
+           $("#"+pid).html(orders);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+             {
+                 alert("Please login!");
+             }
+	});
+}

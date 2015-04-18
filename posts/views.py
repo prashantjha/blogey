@@ -161,6 +161,12 @@ def comment_cmnt(request,cmnt_id):
         args['cmnt_cmnt'] = Comments.objects.all()
         return render_to_response('ajaxviewPost.html', args,context_instance=RequestContext(request))
 
-    
+def more_cmnt(request,cmnt_id):
 
-
+    cmnt = Comments.objects.get(id = cmnt_id)
+    args = {}
+    args.update(csrf(request))
+    args['request'] = request
+    cmnt_type = ContentType.objects.get_for_model(cmnt.__class__)
+    args['more_cmnt'] = Comments.objects.filter(content_type = cmnt_type, object_id = cmnt_id)
+    return render_to_response('more_cmnt.html', args,context_instance=RequestContext(request))
