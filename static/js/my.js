@@ -34,5 +34,9 @@ function comment(taid, cmtid)
             $("#ajaxcmnt").html(orders);
 
         },
+        error: function (jqXHR, textStatus, errorThrown)
+             {
+                 alert("Please login!");
+             }
 	});
 }

@@ -147,7 +147,7 @@ def comment(request,post_id):
         args['cmnt_cmnt'] = Comments.objects.all()
         return render_to_response('viewPost.html', args,context_instance=RequestContext(request))
 
-@login_required(login_url='/login/')
+
 def comment_cmnt(request,cmnt_id):
     #pdb.set_trace()
     cmnt = Comments.objects.get(id=cmnt_id)
@@ -165,7 +165,7 @@ def comment_cmnt(request,cmnt_id):
         args['cmnt_cmnt'] = Comments.objects.all()
         return render_to_response('ajaxviewPost.html', args,context_instance=RequestContext(request))
 
-    return HttpResponse("hello")
+    
 
 def postCmnt(post_id):
     r = {}
