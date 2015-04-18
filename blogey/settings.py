@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 import os
@@ -74,12 +75,36 @@ WSGI_APPLICATION = 'blogey.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
+
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "d7lc208j16ti7n",
+        "USER": "yarnwsoztnhkeh",
+        "PASSWORD": "nenVvFKCMAmCtvDg8S3piQyVKl",
+        "HOST": "ec2-54-225-154-5.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates/'),
