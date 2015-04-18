@@ -23,7 +23,7 @@ SECRET_KEY = 'ysm=0(r8d!g^cb+d*1%sru-#oxjiaetcyj53k3oohly8bo&bqr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 

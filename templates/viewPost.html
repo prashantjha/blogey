@@ -1,48 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<script type="text/javascript">
-	function toggle(cpid)
-	{
-		var x = document.getElementById(cpid).style.display;
-		if (x == 'none')
-		{
-			document.getElementById(cpid).style.display = 'block';
-		}
-		else
-		{
-			document.getElementById(cpid).style.display = 'none';
-		}
-	}
 
-
-	function comment(taid, cmtid)
-	{
-		var cmtext = document.getElementById(taid).value;
-		
-		$.ajax({
-			type:"POST",
-			url:"/comment_cmnt/"+cmtid,
-			data: {
-				csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
-				'comment_text': cmtext,
-				'post_id':document.getElementById("myText").value
-			},
-			success:function(orders)
-	        {
-	            $("#ajaxcmnt").html(orders);
-
-	        },
-	        error: function (jqXHR, textStatus, errorThrown)
-             {
-                 alert("Please login!");
-             }
-		});
-	}
-
-
-</script>
-<div class="container">
+<div class="view-post-template">
 
 	<article>
 		<section>
@@ -57,41 +17,24 @@
 			<a href="/delete/{{post.id}}"><button type="button" class="btn btn-default">Delete Post</button></a>
 		{% endif %}
 	</article>
+	<input type="text" id="myText" style="display: none;" value={{post.id}}>
 	<div class="row" >
-		<div style="display: block" class="col-md-4">
-		<form method="POST" action="/comment/{{post.id}}/">{% csrf_token %}
-			<label for="comment">
-				<textarea name="comment"  placeholder="comment.." required style="height:80px; width: 100%; border-radius: 5px"></textarea>
-				<input type="submit" value="Post" class="btn btn-primary" style="float:right; width:100px;">
-			</label>
-			
-		</form>
-		</div>
 
-		<input type="text" id="myText" style="display: none;" value={{post.id}}>
-		<div id='ajaxcmnt'>
-		<div class="col-md-8 " style=" height:200px; overflow-y:auto;">
-			{% for cmnt in comments %}
-				<div class="comment" id ="postCmnt" align="left" > <span class="author2" >  <strong>{{cmnt.user.username}}:</strong> </span>{{ cmnt.comment }}<button onclick="toggle('cpbox{{cmnt.id}}')">comment</button>
-
-				<div id="cpbox{{cmnt.id}}" class="" style="display:none">
-					<textarea id="ta{{cmnt.id}}"></textarea>
-					<button class="btn btn-primary" onclick="comment('ta{{cmnt.id}}', {{cmnt.id}}), toggle('cpbox{{cmnt.id}}')">Comment</button>
-				</div>
-
+		<div style="display: block" class="col-xs-12 col-sm-12 col-lg-12 col-md-12" >
+			<form method="POST" action="/comment/{{post.id}}/">{% csrf_token %}
+				<label for="comment">
+					<textarea name="comment"  placeholder="comment.." required style="height:80px; width: 100%; border-radius: 5px"></textarea>
+					<input type="submit" value="Comment" class="btn btn-primary" style="float:right; width:100px;">
+				</label>
 				
-				{% for data in cmnt_cmnt %}
+			</form>
+		</div>
+	</div>
 
-					{% if data.content_type.id  != cmnt.content_type.id  and data.object_id == cmnt.id %}	
-						<div class="comment" align="left" > <span class="author2" >  <strong>{{data.user.username}}:</strong> </span>{{ data.comment }}</div>
-					{% endif %}
-
-				{% endfor %}
-
-				</div>
-			{% endfor %}
-			   
-		</div></div>
+	<div class="row" >
+		<div id='ajaxcmnt' class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+			{% include 'ajaxviewPost.html' %}
+		</div>
 
 
 	</div>

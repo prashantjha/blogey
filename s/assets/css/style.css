@@ -5,6 +5,10 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+.view-post-template {
+  padding: 0px 100px;
+  text-align: center;
+}
 .signup-form {
 	margin: 0 auto;
 }
@@ -46,6 +50,7 @@ article {
 	border: #BDC3C7 solid 2px;
 	border-radius: 10px;
 	margin-bottom: 20px;
+	margin-left: 0px;
 }
 
 ::selection {

@@ -1,22 +1,26 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<div class="container">
+<div class="view-post-template">
 
-	{% for post in posts %}
-	<article>
-		<section>
-			<a href="/post/{{post.id}}/" class="title">{{post.title | safe}}</a>
-			<h2 class="author">by <strong>{{post.author.username}}</strong> on {{post.createdDate |date:"M d, Y" }}</h2>
-		</section>
-		
-		<p class="post-content">
-			{{post.content|slice:":50"  |safe}}
-			<a href="/post/{{post.id}}/">...Read More &raquo;</a>
-		</p>
-	</article>
-		
-	{% endfor %}
+	<div class="row" >
+		{% for post in posts %}
+	
+			<div id='ajaxcmnt' class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
+				<article>
+					<section>
+						<a href="/post/{{post.id}}/" class="title">{{post.title | safe}}</a>
+						<h2 class="author">by <strong>{{post.author.username}}</strong> on {{post.createdDate |date:"M d, Y" }}</h2>
+					</section>
+					
+					<p class="post-content">
+						{{post.content|slice:":50"  |safe}}
+						<a href="/post/{{post.id}}/">...Read More &raquo;</a>
+					</p>
+				</article>
+			</div>	
+		{% endfor %}
+	</div>
 
   
 </div>

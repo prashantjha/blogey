@@ -87,17 +87,10 @@ def viewPost(request,post_id):
     args.update(csrf(request))
     args['request'] = request
     args['post'] = post
-    #pdb.set_trace()
     post_type = ContentType.objects.get_for_model(post.__class__)
     comments = Comments.objects.filter(content_type = post_type, object_id = post_id).order_by('-conmmentTime')
     args['comments'] = comments
     args['cmnt_cmnt'] = Comments.objects.all()
-
-    """data = serializers.serialize("json", Comments.objects.all())
-    allField = json.loads(data)
-    args['data'] = allField"""
-    args['result'] = postCmnt(post_id)
-    #print postCmnt(post_id)
     return render_to_response('viewPost.html', args,context_instance=RequestContext(request))
     
 
@@ -169,32 +162,5 @@ def comment_cmnt(request,cmnt_id):
         return render_to_response('ajaxviewPost.html', args,context_instance=RequestContext(request))
 
     
-
-def postCmnt(post_id):
-    r = {}
-    post = Post.objects.get(id=post_id)
-    post_type = ContentType.objects.get_for_model(post.__class__)
-    q = Comments.objects.filter(content_type = post_type, object_id = post_id)
-
-
-    for c in q:
-        r[c] = cmntCmnt(c)
-
-    return r
-
-
-
-def cmntCmnt(c):
-    #pdb.set_trace()
-    
-    cmnt_type = ContentType.objects.get_for_model(c.__class__)
-    z = Comments.objects.filter(content_type = cmnt_type, object_id = c.id)
-
-    p ={}
-    q =[]
-    for l in  z:
-        p[l] = cmntCmnt(l)
-    q.append(p)
-    return q
 
 
